@@ -32,7 +32,10 @@ function dateToTimestamp(date) {
  * Date(2015, 10, 20, 23, 15, 1) => '23:15:01'
  */
 function getTime(date) {
-  return date.toLocaleTimeString().padStart(8, '0');
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const seconds = String(date.getSeconds()).padStart(2, '0');
+  return `${hours}:${minutes}:${seconds}`;
 }
 
 /**
@@ -176,7 +179,7 @@ function getCountWeekendsInMonth(month, year) {
   let counter = 0;
   for (let i = 1; i <= daysInMonth; i += 1) {
     const oneDay = new Date(year, month - 1, i);
-    if (oneDay.getUTCDay() === 5 || oneDay.getUTCDay() === 6) {
+    if (oneDay.getDay() === 6 || oneDay.getDay() === 0) {
       counter += 1;
     }
   }
